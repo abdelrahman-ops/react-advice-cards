@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [index, setIndex] = useState(0);
+
+  const messages = [
+    "Take it one step at a time.",
+    "Believe in yourself.",
+    "Never give up."
+  ];
+
+  function next() {
+    setIndex((prevIndex) => (prevIndex + 1) % messages.length);
+  }
+
+  function previous() {
+    setIndex((prevIndex) => (prevIndex - 1 + messages.length) % messages.length);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div class="container">
+        <h1>Card <span>{index+1}</span></h1>
+        <h1>{messages[index]}</h1>
+        <button onClick={previous}>Previous</button>
+        <button onClick={next}>Next</button>
+      </div>
     </div>
   );
 }
